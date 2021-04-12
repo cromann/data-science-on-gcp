@@ -16,7 +16,7 @@ URL="https://${REGION}-${PROJECT}.cloudfunctions.net/${UPATH}"
 echo {\"bucket\":\"${BUCKET}\"\,\"token\":\"${TOKEN}\"} > /tmp/message
 
 gcloud beta scheduler jobs create http monthlyupdate \
-       --schedule="8 of month 10:00" \
+       --schedule="every 2 minutes" \
        --uri=$URL \
        --max-backoff=7d \
        --max-retry-attempts=5 \
