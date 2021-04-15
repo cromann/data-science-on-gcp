@@ -116,7 +116,7 @@ ORDER BY
        topics[event_type] = publisher.topic_path(args.project, event_type)
        try:
          # Getting the new topics from PubSub
-          for topic in publisher.list_topics(args.project):
+          for topic in publisher.list_topics(project_path):
                 print(topic)
        except:
          #Creating New topics
