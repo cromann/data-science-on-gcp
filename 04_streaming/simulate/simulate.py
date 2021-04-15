@@ -116,11 +116,11 @@ ORDER BY
        topics[event_type] = publisher.topic_path(args.project, event_type)
        try:
          # Getting the new topics from PubSub
-          for topic in publisher.list_topics(request={"project": args.project}):
+          for topic in publisher.list_topics(args.project):
                 print(topic)
        except:
          #Creating New topics
-           publisher.create_topic(request={"name": topics[event_type]})
+           publisher.create_topic(topics[event_type])
 
    # notify about each row in the dataset
    programStartTime = datetime.datetime.utcnow()
