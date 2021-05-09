@@ -78,10 +78,10 @@ testdata = spark.sql(testquery)
 examples = testdata.rdd.map(to_example)
 
 def eval(labelpred):
-    cancel = labelpred.filter(lambda (label, pred): pred < 0.7)
-    nocancel = labelpred.filter(lambda (label, pred): pred >= 0.7)
-    corr_cancel = cancel.filter(lambda (label, pred): label == int(pred >= 0.7)).count()
-    corr_nocancel = nocancel.filter(lambda (label, pred): label == int(pred >= 0.7)).count()
+    cancel = labelpred.filter(lambda l: l[1] < 0.7)
+    nocancel = labelpred.filter(lambda l: l[1] >= 0.7)
+    corr_cancel = cancel.filter(lambda l: l[0] == int(l[1] >= 0.7)).count()
+    corr_nocancel = nocancel.filter(lambda l: l[0] == int(l[1] >= 0.7)).count()
     
     cancel_denom = cancel.count()
     nocancel_denom = nocancel.count()
@@ -103,6 +103,6 @@ print(eval(labelpred))
 
 # keep only those examples near the decision threshold
 print('Flights near decision threshold:')
-labelpred = labelpred.filter(lambda (label, pred): pred > 0.65 and pred < 0.75)
+labelpred = labelpred.filter(lambda l: l[1] > 0.65 and l[1] < 0.75)
 print(eval(labelpred))
 
