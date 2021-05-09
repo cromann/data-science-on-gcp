@@ -10,4 +10,4 @@ PYSPARK=$2
 
 gsutil -m rm -r gs://$BUCKET/flights/sparkmloutput
 sed s"/BUCKET_NAME/$BUCKET/g" $2 > /tmp/logistic.py
-gcloud dataproc jobs submit pyspark --cluster ch6cluster /tmp/logistic.py
+gcloud dataproc jobs submit pyspark --cluster ch6cluster --region=us-east1 /tmp/logistic.py
